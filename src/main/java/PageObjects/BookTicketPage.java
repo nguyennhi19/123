@@ -5,7 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class BookTicketPage {
-    //Locator123456789
+    //Locator12345
+
     private final By loc_selectDate = By.xpath("//select[@name='Date']");
     private final By loc_selectDepartFrom = By.xpath("//select[@name='DepartStation']");
     private final By loc_selectArriverAt = By.xpath("//select[@name='ArriveStation']");
