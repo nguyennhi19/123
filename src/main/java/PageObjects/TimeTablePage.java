@@ -25,6 +25,5 @@ public class TimeTablePage {
     public void BookTicketFormTrainTimeTableScreen(){
         this.getBtnBookTicket().click();
     }
-    pathspec 'master' did not match any file(s) known to git
 
 }

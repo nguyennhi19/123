@@ -2,12 +2,15 @@ package PageObjects.Railway;
 
 import Common.Constant.Constant;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class GeneralPage {
     //Locators
-    private final String TitleBookTicket = "Book ticket";
+    private final String titleBookTicket = "Book ticket";
     private final By loc_tabLogin = By.linkText("Login");
     private final By loc_tabLogout = By.linkText("Log out");
     private final By loc_tabBookTicket = By.linkText("Book ticket");
@@ -53,7 +56,6 @@ public class GeneralPage {
     private WebElement getTabMyTicket() {
         return Constant.driver.findElement(loc_tabMyTicket);
     }
-
 
     private WebElement getWelcomeMessage() {
         return Constant.driver.findElement(loc_WelcomeMessage);
@@ -112,6 +114,12 @@ public class GeneralPage {
     }
 
     public boolean isAtBookTicketPage() {
-        return this.getBookTicketPage().getText().equals(TitleBookTicket);
+        return this.getBookTicketPage().getText().equals(titleBookTicket);
+    }
+
+    private void getScrollToElement(){
+        WebElement element = Constant.driver.findElement(By.id("id_of_element"));
+        ((JavascriptExecutor) Constant.driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        Constant.driver.manage().timeouts().implicitlyWait(500, TimeUnit.SECONDS);
     }
 }
