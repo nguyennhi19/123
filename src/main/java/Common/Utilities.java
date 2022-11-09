@@ -1,4 +1,4 @@
-package Common.Common;
+package Common;
 
 public class Utilities {
     public void getProjectPath(){
