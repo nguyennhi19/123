@@ -1,6 +1,6 @@
 package PageObjects.Railway;
 
-import Common.Constant.Constant;
+import Common.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GeneralPage {
     //Locators
+    private final String titleLogin = "Login Page";
     private final String titleBookTicket = "Book ticket";
     private final By loc_tabLogin = By.linkText("Login");
     private final By loc_tabLogout = By.linkText("Log out");
@@ -21,8 +22,8 @@ public class GeneralPage {
     private final By loc_tabMyTicket = By.linkText("My ticket");
     private final By loc_WelcomeMessage = By.xpath("//div[@class='account']/strong");
     private final By loc_errorMessage = By.xpath("//div[@id='content']/p");
-    private final By loc_txtTitleBookTicket = By.xpath("//h1[contains(.,'Book ticket')]");
-
+    private final By loc_txtTitleBookTicket = By.xpath("//h1[contains(.,'Book ticket')]");//h1[contains(.,'Login Page')]
+    private final By loc_txtTitleLogin = By.xpath("//h1[contains(.,'Login Page')]");
 
     //Elements
     private WebElement getTabLogin() {
@@ -65,12 +66,15 @@ public class GeneralPage {
         return Constant.driver.findElement(loc_errorMessage);
     }
 
-    //Methods
+    public WebElement getLoginPage() {
+        return Constant.driver.findElement(loc_txtTitleLogin);
+    }
 
     public WebElement getBookTicketPage() {
         return Constant.driver.findElement(loc_txtTitleBookTicket);
     }
 
+    //Methods
     public void gotoLoginPage() {
         this.getTabLogin().click();
     }
@@ -115,6 +119,10 @@ public class GeneralPage {
 
     public boolean isAtBookTicketPage() {
         return this.getBookTicketPage().getText().equals(titleBookTicket);
+    }
+
+    public boolean isAtLoginPage() {
+        return this.getLoginPage().getText().equals(titleLogin);
     }
 
     private void getScrollToElement(){

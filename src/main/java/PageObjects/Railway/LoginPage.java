@@ -1,6 +1,6 @@
 package PageObjects.Railway;
 
-import Common.Constant.Constant;
+import Common.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -13,7 +13,10 @@ public class LoginPage extends GeneralPage {
     private final By loc_myTicketTab = By.xpath("//span[contains(.,'My ticket')]");
     private final By loc_changePasswordTab = By.xpath("//span[contains(.,'Change password')]");
     private final By loc_btnLogout = By.xpath("//span[contains(.,'Log out')]");
-    private final By _lblNameLoginPage = By.xpath("//div[@id='content']/h1");
+    private final By _lblNamePage = By.xpath("//div[@id='content']/h1");
+    private final String loc_myTicketPageTitle = "Manage Tickets";
+    private final String loc_changePasswordPageTitle = "Change password";
+
 
     //Elements
     private WebElement getTextEmail(){
@@ -28,8 +31,8 @@ public class LoginPage extends GeneralPage {
         return Constant.driver.findElement(loc_btnLogin);
     }
 
-    private WebElement getNameLoginPage(){
-        return Constant.driver.findElement(_lblNameLoginPage);
+    private WebElement getNamePage(){
+        return Constant.driver.findElement(_lblNamePage);
     }
 
     //Methods
@@ -38,8 +41,40 @@ public class LoginPage extends GeneralPage {
         this.getTextPassword().sendKeys(password);
         this.getBtnLogin().click();
     }
+
     public boolean isAtLoginPage() {
-        return getNameLoginPage().getText().equals(loc_loginPageTitle);
+        return getNamePage().getText().equals(loc_loginPageTitle);
+    }
+
+    public boolean isAtMyTicketPage() {
+        return getNamePage().getText().equals(loc_myTicketPageTitle);
+    }
+
+    public boolean isAtChangPasswordPage() {
+        return getNamePage().getText().equals(loc_changePasswordPageTitle);
+    }
+
+
+    public void numberOfLogins(int i) {
+        LoginPage loginPage = new LoginPage();
+        int count = 1;
+        while (count < i) {
+            loginPage.login(Constant.EMAIL, Constant.INVALID_PASSWORD);
+            count = count + 1;
+        }
+    }
+
+    public boolean verifyMsgAccountHasNotBeenActivated(boolean check) {
+        HomePage homePage = new HomePage();
+        boolean flag = false;
+        if(check == false){
+            String actualMsg = homePage.getErrorMsg();
+            String expectedMsg = Constant.MSG_INVALID_USERNAME_PASSWORD;
+            if(actualMsg.equals(expectedMsg)){
+                flag = true;
+            };
+        }
+        return flag;
     }
 
     public boolean verifyMyTicketTabDisplayed() {
@@ -65,4 +100,5 @@ public class LoginPage extends GeneralPage {
         }
         return flag;
     }
+
 }

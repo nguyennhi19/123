@@ -1,4 +1,4 @@
-package Common.Constant;
+package Common;
 
 import org.openqa.selenium.WebDriver;
 
@@ -12,6 +12,12 @@ public class Constant {
     public static final String INVALID_PASSWORD = "1";
     public static final String MSG_PROBLEM_WITH_LOGIN = "There was a problem with your login and/or errors exist in your form.";
     public static final String MSG_INVALID_USERNAME_PASSWORD = "Invalid username or password. Please try again.";
+    public static final int NUMBER_OF_LOGIN = 4;
+    public static final String MSG_RUN_OUT_OF_TRY_LOGIN = "User can't login and message \"You have used 4 out of 5 login attempts. After all 5 have been used, you will be unable to login for 15 minutes.\" appears.";
+    public static final String EMAIL_REGISTER = "nhi@gmail.com";
+    public static final String CONFIRM_PASSWORD = "12345678";
+    public static final String PID = "12345678";
+    public static String MSG_REGISTER_SUCCESSFULLY = "Thank you for registering your account";
     public static String VALID_DEPART_DATE = "11/15/2022";
     public static String VALID_DEPART_From = "Huế";
     public static String VALID_ARRIVE_AT = "Sài Gòn";
