@@ -22,7 +22,7 @@ public class GeneralPage {
     private final By loc_tabMyTicket = By.linkText("My ticket");
     private final By loc_WelcomeMessage = By.xpath("//div[@class='account']/strong");
     private final By loc_errorMessage = By.xpath("//div[@id='content']/p");
-    private final By loc_txtTitleBookTicket = By.xpath("//h1[contains(.,'Book ticket')]");//h1[contains(.,'Login Page')]
+    private final By loc_txtTitleBookTicket = By.xpath("//h1[contains(.,'Book ticket')]");
     private final By loc_txtTitleLogin = By.xpath("//h1[contains(.,'Login Page')]");
 
     //Elements

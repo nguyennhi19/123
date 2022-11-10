@@ -2,7 +2,10 @@ package PageObjects;
 
 import Common.Constant;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+
+import java.util.concurrent.TimeUnit;
 
 public class ForgotPasswordPage {
     // Locators
@@ -20,8 +23,17 @@ public class ForgotPasswordPage {
     }
 
     // Methods
+    private void getScrollToElement(){
+        WebElement element = Constant.driver.findElement(loc_btnSendInstructions);
+        ((JavascriptExecutor) Constant.driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        Constant.driver.manage().timeouts().implicitlyWait(500, TimeUnit.SECONDS);
+    }
+
     public void SendInstruction(String email){
+        this.getScrollToElement();
         this.getEmailAddress().sendKeys(email);
         this.getBtnSendInstructions().click();
     }
+
+
 }

@@ -1,6 +1,7 @@
 package Testcases.Railway;
 
 import Common.Constant;
+import Common.DriverManager;
 import PageObjects.Railway.HomePage;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -14,7 +15,7 @@ public class TestBase {
         System.out.println("Pre-condition");
         System.setProperty("webdriver.chrome.driver", "D:\\SeleniumJava\\NguyenNhi_Railway_Automation\\src\\main\\resources\\Executables\\chromedriver.exe");
         Constant.driver = new ChromeDriver();
-        homePage.open();
+        DriverManager.open();
     }
 
     @AfterMethod

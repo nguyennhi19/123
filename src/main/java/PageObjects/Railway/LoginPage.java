@@ -2,11 +2,16 @@ package PageObjects.Railway;
 
 import Common.Constant;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+
+import java.util.concurrent.TimeUnit;
 
 public class LoginPage extends GeneralPage {
     //Locator
-    private final String loc_loginPageTitle = "Login Page";
+    private final String loginPageTitle = "Login Page";
+    private final String myTicketPageTitle = "Manage Tickets";
+    private final String changePasswordPageTitle = "Change password";
     private final By loc_txtEmail = By.xpath("//input[@id='username']");
     private final By loc_txtPassword = By.xpath("//input[@id='password']");
     private final By loc_btnLogin = By.xpath("//input[@value='Login']");
@@ -14,8 +19,7 @@ public class LoginPage extends GeneralPage {
     private final By loc_changePasswordTab = By.xpath("//span[contains(.,'Change password')]");
     private final By loc_btnLogout = By.xpath("//span[contains(.,'Log out')]");
     private final By _lblNamePage = By.xpath("//div[@id='content']/h1");
-    private final String loc_myTicketPageTitle = "Manage Tickets";
-    private final String loc_changePasswordPageTitle = "Change password";
+    private final By loc_linkForgotPasswordPage = By.xpath("//div[@id='content']/ul/li[3]/a");
 
 
     //Elements
@@ -35,6 +39,10 @@ public class LoginPage extends GeneralPage {
         return Constant.driver.findElement(_lblNamePage);
     }
 
+    public WebElement getForgotPasswordPage(){
+        return Constant.driver.findElement(loc_linkForgotPasswordPage);
+    }
+
     //Methods
     public void login(String email, String password){
         this.getTextEmail().sendKeys(email);
@@ -43,15 +51,15 @@ public class LoginPage extends GeneralPage {
     }
 
     public boolean isAtLoginPage() {
-        return getNamePage().getText().equals(loc_loginPageTitle);
+        return getNamePage().getText().equals(loginPageTitle);
     }
 
     public boolean isAtMyTicketPage() {
-        return getNamePage().getText().equals(loc_myTicketPageTitle);
+        return getNamePage().getText().equals(myTicketPageTitle);
     }
 
     public boolean isAtChangPasswordPage() {
-        return getNamePage().getText().equals(loc_changePasswordPageTitle);
+        return getNamePage().getText().equals(changePasswordPageTitle);
     }
 
 
@@ -101,4 +109,14 @@ public class LoginPage extends GeneralPage {
         return flag;
     }
 
+    private void getScrollToElement(){
+        WebElement element = Constant.driver.findElement(loc_linkForgotPasswordPage);
+        ((JavascriptExecutor) Constant.driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        Constant.driver.manage().timeouts().implicitlyWait(500, TimeUnit.SECONDS);
+    }
+
+    public void goToForgotPasswordPage(){
+        this.getScrollToElement();
+        this.getForgotPasswordPage().click();
+    }
 }

@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends TestBase {
 
-
     LoginPage loginPage = new LoginPage();
 
     @Test(description = "TC01 - User can log into Railway with valid username and password")

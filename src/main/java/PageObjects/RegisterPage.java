@@ -14,7 +14,10 @@ public class RegisterPage {
     private final By loc_txtConfirmPassword = By.xpath("//input[@id=\"confirmPassword\"]");
     private final By loc_txtPid = By.xpath("//input[@id=\"pid\"]");
     private final By loc_btnRegister = By.xpath("//input[@value=\"Register\"]");
-    private final By registerSuccessMsg = By.xpath("//div[@id='content']/p");
+    private final By loc_registerSuccessMsg = By.xpath("//div[@id='content']/p");
+    private final By loc_registerFailedMsg = By.xpath("//p[@class='message error']");
+    private final By loc_passwordFieldMsg = By.xpath("//li[@class='password']/label[@class='validation-error']");
+    private final By loc_PIDMsg = By.xpath("//li[@class='pid-number']/label[@class='validation-error']");
 
     //Elements
 
@@ -39,7 +42,19 @@ public class RegisterPage {
     }
 
     private WebElement getRegisterSuccess(){
-        return Constant.driver.findElement(registerSuccessMsg);
+        return Constant.driver.findElement(loc_registerSuccessMsg);
+    }
+
+    public WebElement getRegisterFailed() {
+        return Constant.driver.findElement(loc_registerFailedMsg);
+    }
+
+    public WebElement getMsgPassWordField() {
+        return Constant.driver.findElement(loc_passwordFieldMsg);
+    }
+
+    public WebElement getMsgPIDFieldElement() {
+        return Constant.driver.findElement(loc_PIDMsg);
     }
 
     //Methods
@@ -61,4 +76,18 @@ public class RegisterPage {
     public String getRegisterSuccessMsg() {
         return getRegisterSuccess().getText();
     }
+
+    public String getRegisterFailedMsg() {
+        return getRegisterFailed().getText();
+    }
+
+    public String getPIDFieldMsg() {
+        return getMsgPIDFieldElement().getText();
+    }
+
+    public String getPassWordFieldMsg() {
+        return getMsgPassWordField().getText();
+    }
+
+
 }
