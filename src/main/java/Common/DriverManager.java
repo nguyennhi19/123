@@ -6,27 +6,24 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class DriverManager {
 
     public static void open() {
-        Constant.driver.navigate().to(Constant.RAILWAY_URL);
+        Constant.DRIVER.navigate().to(Constant.RAILWAY_URL);
     }
 
     public static void setChromeDriver(){
         System.setProperty(Constant.WEB_DRIVER_KEY,Constant.PATH_DRIVER_DIRECTION);
-        Constant.driver = new ChromeDriver();
+        Constant.DRIVER = new ChromeDriver();
     }
 
     public static void setFirefoxDriver(){
         System.setProperty(Constant.FIREFOX_DRIVER_KEY,Constant.FIREFOX_DRIVER);
-        Constant.driver = new FirefoxDriver();
+        Constant.DRIVER = new FirefoxDriver();
     }
 
     public static void setDriver(String browser) {
-        System.out.println("Pre-condition");
+        Log.info("Pre-condition");
         switch ( browser ) {
             case "firefox":
                 setFirefoxDriver();
-                break;
-            case "chrome":
-                setChromeDriver();
                 break;
             default:
                 setChromeDriver();
@@ -35,7 +32,7 @@ public class DriverManager {
     }
 
     public static void closeBrowser() {
-        System.out.println("Post-condition");
-        Constant.driver.quit();
+        Log.info("Post-condition");
+        Constant.DRIVER.quit();
     }
 }
