@@ -1,39 +1,37 @@
 package PageObjects;
 
-import Common.Constant;
+import Common.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-
-import java.util.concurrent.TimeUnit;
 
 public class ForgotPasswordPage {
     // Locators
-    private final By loc_txtEmailAddress = By.xpath("//input[@id='email']");
-    private final By loc_btnSendInstructions = By.xpath("//input[@type='submit']");
+    private final By txtEmailAddress = By.id("email");
+    private final By btnSendInstructions = By.xpath("//input[@type='submit']");
+    private final By lblErrorMsg = By.xpath("//p[@class='message error']");
 
     // Elements
-
     public WebElement getEmailAddress() {
-        return Constant.driver.findElement(loc_txtEmailAddress);
+        return Constant.DRIVER.findElement(txtEmailAddress);
     }
 
     public WebElement getBtnSendInstructions() {
-        return Constant.driver.findElement(loc_btnSendInstructions);
+        return Constant.DRIVER.findElement(btnSendInstructions);
+    }
+
+    public WebElement getErrorMsg(){
+        return Constant.DRIVER.findElement(lblErrorMsg);
     }
 
     // Methods
-    private void getScrollToElement(){
-        WebElement element = Constant.driver.findElement(loc_btnSendInstructions);
-        ((JavascriptExecutor) Constant.driver).executeScript("arguments[0].scrollIntoView(true);", element);
-        Constant.driver.manage().timeouts().implicitlyWait(500, TimeUnit.SECONDS);
-    }
-
-    public void SendInstruction(String email){
-        this.getScrollToElement();
+    public void sendInstruction(String email){
         this.getEmailAddress().sendKeys(email);
+        Utilities.scrollToElement(btnSendInstructions);
         this.getBtnSendInstructions().click();
     }
 
-
+    public String getErrorMsgAtForgotPassword(){
+        return this.getErrorMsg().getText();
+    }
 }
+
