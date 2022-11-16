@@ -1,76 +1,71 @@
 package PageObjects;
 
 import Common.Constant;
+import Common.Utilities;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-
-import java.util.concurrent.TimeUnit;
 
 public class RegisterPage {
     //Locator
-    private final By loc_txtEmail = By.xpath("//input[@id='email']");
-    private final By loc_txtPassword = By.xpath("//input[@id=\"password\"]");
-    private final By loc_txtConfirmPassword = By.xpath("//input[@id=\"confirmPassword\"]");
-    private final By loc_txtPid = By.xpath("//input[@id=\"pid\"]");
-    private final By loc_btnRegister = By.xpath("//input[@value=\"Register\"]");
-    private final By loc_registerSuccessMsg = By.xpath("//div[@id='content']/p");
-    private final By loc_registerFailedMsg = By.xpath("//p[@class='message error']");
-    private final By loc_passwordFieldMsg = By.xpath("//li[@class='password']/label[@class='validation-error']");
-    private final By loc_PIDMsg = By.xpath("//li[@class='pid-number']/label[@class='validation-error']");
+    private final By txtEmail = By.xpath("//input[@id='email']");
+    private final By txtPassword = By.xpath("//input[@id='password']");
+    private final By txtConfirmPassword = By.xpath("//input[@id='confirmPassword']");
+    private final By txtPid = By.xpath("//input[@id='pid']");
+    private final By btnRegister = By.xpath("//input[@value='Register']");
+    private final By registerSuccessMsg = By.xpath("//div[@id='content']/p");
+    private final By registerFailedMsg = By.xpath("//p[@class='message error']");
+    private final By passwordFieldMsg = By.xpath("//li[@class='password']/label[@class='validation-error']");
+    private final By pIDMsg = By.xpath("//li[@class='pid-number']/label[@class='validation-error']");
 
     //Elements
-
     private WebElement getTextEmail(){
-        return Constant.driver.findElement(loc_txtEmail);
+        return Constant.driver.findElement(txtEmail);
     }
 
     private WebElement getTextPassword(){
-        return Constant.driver.findElement(loc_txtPassword);
+        return Constant.driver.findElement(txtPassword);
     }
 
     private WebElement getTextConfirmPassword(){
-        return Constant.driver.findElement(loc_txtConfirmPassword);
+        return Constant.driver.findElement(txtConfirmPassword);
     }
 
     private WebElement getTextPid(){
-        return Constant.driver.findElement(loc_txtPid);
+        return Constant.driver.findElement(txtPid);
     }
 
     private WebElement getBtnRegister(){
-        return Constant.driver.findElement(loc_btnRegister);
+        return Constant.driver.findElement(btnRegister);
     }
 
     private WebElement getRegisterSuccess(){
-        return Constant.driver.findElement(loc_registerSuccessMsg);
+        return Constant.driver.findElement(registerSuccessMsg);
     }
 
     public WebElement getRegisterFailed() {
-        return Constant.driver.findElement(loc_registerFailedMsg);
+        return Constant.driver.findElement(registerFailedMsg);
     }
 
     public WebElement getMsgPassWordField() {
-        return Constant.driver.findElement(loc_passwordFieldMsg);
+        return Constant.driver.findElement(passwordFieldMsg);
     }
 
     public WebElement getMsgPIDFieldElement() {
-        return Constant.driver.findElement(loc_PIDMsg);
+        return Constant.driver.findElement(pIDMsg);
     }
 
     //Methods
-    private void getScrollToElement(){
-        WebElement element = Constant.driver.findElement(loc_btnRegister);
-        ((JavascriptExecutor) Constant.driver).executeScript("arguments[0].scrollIntoView(true);", element);
-        Constant.driver.manage().timeouts().implicitlyWait(500, TimeUnit.SECONDS);
-    }
-
     public void register(String email,String password,String confirmPassword, String pid){
         this.getTextEmail().sendKeys(email);
         this.getTextPassword().sendKeys(password);
         this.getTextConfirmPassword().sendKeys(confirmPassword);
         this.getTextPid().sendKeys(pid);
-        this.getScrollToElement();
+        Utilities.getScrollToElement(btnRegister);
         this.getBtnRegister().click();
+    }
+
+    public String createGenerateEmail() {
+        return "Railway+" + Utilities.GenRandomString() + "@gmail.com";
     }
 
     public String getRegisterSuccessMsg() {

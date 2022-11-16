@@ -7,18 +7,18 @@ import PageObjects.TimeTablePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TimeTableTest extends TestBase{
+public class TimeTableTest extends BaseTest {
     TimeTablePage timeTablePage = new TimeTablePage();
     LoginPage loginPage = new LoginPage();
     BookTicketPage bookTicketPage = new BookTicketPage();
 
 
-    @Test(description = "TC15 - User can open \"Book ticket\" page by clicking on \"Book ticket\" link in \"Train timetable\" page")
+    @Test(description = "TC15 - User can open Book ticket page by clicking on Book ticket link in Train timetable page")
     public void TC01(){
-        homePage.gotoLoginPage();
+        homePage.gotoMenuTap(Constant.TAB_LOGIN);
         loginPage.login(Constant.EMAIL, Constant.PASSWORD);
-        homePage.gotoTimetablePage();
-        timeTablePage.BookTicketFormTrainTimeTableScreen(Constant.DEPART_FROM, Constant.ARRIVE_AT);
+        homePage.gotoMenuTap(Constant.TAB_TIMETABLE);
+        timeTablePage.bookTicketFormTrainTimeTableScreen(Constant.DEPART_FROM, Constant.ARRIVE_AT);
         String actualMsg = bookTicketPage.getContentBookTicketPage();
         String expectedMsg = Constant.MSG_CONTENT_OF_BOOK_TICKET_PAGE;
         Assert.assertEquals(actualMsg, expectedMsg, "you are is not at book ticket page");
