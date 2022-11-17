@@ -66,4 +66,5 @@ public class Constant {
     public static final String PRICE_OF_SBC = "660000";
     public static final String EMAIL_DRESS_HREF = "mailto:thanh.viet.le@logigear.com";
     public static final String ERROR_MSG_FORGOT_PASSWORD_UN_EXITING="This email address doesn't exist.";
+    public static final String TITLE_FILTER_FORM = "Filters:";
 }

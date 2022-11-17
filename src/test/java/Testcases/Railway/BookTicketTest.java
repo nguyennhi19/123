@@ -74,7 +74,7 @@ public class BookTicketTest extends BaseTest {
     }
 
     @Test(description = "TC7 - User can book 1 ticket at a time")
-    public void TC07() throws InterruptedException {
+    public void TC07() {
         homePage.gotoMenuTap(Constant.TAB_LOGIN);
         loginPage.login(Constant.EMAIL,Constant.PASSWORD);
         homePage.gotoMenuTap(Constant.TAB_BOOK_TICKET);

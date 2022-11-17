@@ -13,8 +13,11 @@ public class MyTicketPage {
     private final By selArriveStation = By.name("FilterArStation");
     private final By txtDepartDate = By.name("FilterDpDate");
     private final By selStatus = By.name("FilterStatus");
+    private final By titleFilter = By.xpath("//div[@class = 'Filter']//strong");
     private final By btnApplyFilter = By.xpath("//input[@value='Apply Filter']");
     private final By position = By.xpath("//table[@class='MyTable']//tbody//tr[last()]//td");
+    private final By note = By.xpath("//li[text() = 'You currently book 7 tickets, you can book 3 more.']");
+
 
     //Elements
     private Select getDepartStationElement() {
@@ -37,8 +40,16 @@ public class MyTicketPage {
         return Constant.driver.findElement(btnApplyFilter);
     }
 
+    private WebElement getTitleFilterElement() {
+        return Constant.driver.findElement(titleFilter);
+    }
+
     public WebElement getPositionElement() {
         return Constant.driver.findElement(position);
+    }
+
+    public String getNote() {
+        return Constant.driver.findElement(note).getText();
     }
 
     //Methods
@@ -63,9 +74,26 @@ public class MyTicketPage {
     }
 
     public static int CheckRowConditionFilter(String filterName, String value){
-        //table[@class='MyTable']//td[count(//table[@class='MyTable']//th[text()= '%s']/preceding-sibling::th)+1][text()='%s']
         String text = "//table[@class='MyTable']//td[count(//table[@class='MyTable']//th[text()= '%s']/preceding-sibling::th)+1][text()='%s']";
         By rowConditionElement = By.xpath(String.format(text,filterName,value));
+        return Constant.driver.findElements(rowConditionElement).size();
+    }
+
+    public static int CheckRowConditionsFilter(String filterName, String value,String value1, String value2, String value3) {
+        String text = "//table[@class='MyTable']//td[count(//table[@class='MyTable']//th[text()= '%s']/preceding-sibling::th)+1][text()='%s']";
+        String text1 = "/following-sibling::td[text() = '%s']";
+        String text2 = "/following-sibling::td[text() = '%s']";
+        String text3 = "/following-sibling::td[text() = '%s']";
+        if(value1.equals("")){
+            text1 = "";
+        }
+        if(value2.equals("")){
+             text2 = "";
+        }
+        if(value3.equals("")){
+             text3 = "";
+        }
+        By rowConditionElement = By.xpath(String.format(text+text1+text2+text3,filterName,value,value1,value2,value3));
         return Constant.driver.findElements(rowConditionElement).size();
     }
 
@@ -112,6 +140,7 @@ public class MyTicketPage {
         Alert alert = Constant.driver.switchTo().alert();
         alert.accept();
     }
+
     public boolean verifyTicketWasDeleted(String actualMsg, String expectedMsg) {
         boolean flag = false;
         int lineNumberBeforeDelete = Integer.parseInt(actualMsg);
@@ -121,4 +150,25 @@ public class MyTicketPage {
             flag = true;
         return flag;
     }
+
+    public boolean isTitleFilterForm(){
+        System.out.println(getNote().contains(getAmountTicket()));
+
+        boolean flag = false;
+        if (this.getTitleFilterElement().getText().equals(Constant.TITLE_FILTER_FORM)){
+            flag = true;
+        }
+        return flag;
+    }
+
+    public static String getAmountTicket(){
+        By amountTicket = By.xpath("//table[@class='MyTable']//td[count(//table[@class='MyTable']//th[text()= 'Status']/preceding-sibling::th)+1][text()='New']");
+        return String.valueOf(Constant.driver.findElements(amountTicket).size());
+    }
+
+    public boolean checkAmountTicket(){
+        String text = " book "+ getAmountTicket() +" tickets";
+        return getNote().contains(text);
+    }
+
 }

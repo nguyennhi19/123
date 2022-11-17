@@ -21,15 +21,55 @@ public class MyTicketTest extends BaseTest {
         Assert.assertFalse(myTicketPage.verifyTicketWasDeleted(countItemBeforeDelete, countItemAfterDelete), "Ticket cannot be deleted");
     }
 
-    @Test(description = "TC02 - User can filter a ticket")
+    @Test(description = "TC02 - User can filter with Depart Station")
     public void TC02() {
         homePage.gotoMenuTap(Constant.TAB_LOGIN);
         loginPage.login(Constant.EMAIL, Constant.PASSWORD);
         homePage.gotoMenuTap(Constant.TAB_MY_TICKET);
-        int before = myTicketPage.CheckRowConditionFilter("Depart Station", "Huế");
+        int before = MyTicketPage.CheckRowConditionsFilter("Depart Station", "Huế", "","","");
         myTicketPage.Filter("Huế", "", "", "");
-        int after = myTicketPage.CheckRowConditionFilter("Depart Station", "Huế");
+        int after = MyTicketPage.CheckRowConditionsFilter("Depart Station", "Huế", "","","");
         boolean checkFilterCorrect = myTicketPage.checkFilterCorrect(before,after);
         Assert.assertTrue(checkFilterCorrect, "filter fail");
     }
+    @Test(description = "TC03 - User can filter with Depart Station and Arrive Station")
+    public void TC03() {
+        homePage.gotoMenuTap(Constant.TAB_LOGIN);
+        loginPage.login(Constant.EMAIL, Constant.PASSWORD);
+        homePage.gotoMenuTap(Constant.TAB_MY_TICKET);
+        int before = MyTicketPage.CheckRowConditionsFilter("Depart Station", "Sài Gòn","Phan Thiết", "", "");
+        myTicketPage.Filter("Sài Gòn", "Phan Thiết", "", "");
+        int after = MyTicketPage.CheckRowConditionsFilter("Depart Station", "Sài Gòn","Phan Thiết", "", "");
+        boolean checkFilterCorrect = myTicketPage.checkFilterCorrect(before,after);
+        Assert.assertTrue(checkFilterCorrect, "filter fail");
+    }
+
+    @Test(description = "TC04 - User can filter ")
+    public void TC04() {
+        homePage.gotoMenuTap(Constant.TAB_LOGIN);
+        loginPage.login(Constant.EMAIL, Constant.PASSWORD);
+        homePage.gotoMenuTap(Constant.TAB_MY_TICKET);
+        int before = MyTicketPage.CheckRowConditionsFilter("Depart Station", "Sài Gòn","Phan Thiết", "10/30/2022", "Expired");
+        myTicketPage.Filter("Sài Gòn", "Phan Thiết", "10/30/2022", "Expired");
+        int after = MyTicketPage.CheckRowConditionsFilter("Depart Station", "Sài Gòn","Phan Thiết", "10/30/2022", "Expired");
+        boolean checkFilterCorrect = myTicketPage.checkFilterCorrect(before,after);
+        Assert.assertTrue(checkFilterCorrect, "filter fail");
+    }
+
+    @Test(description = "TC05 - The filter not display when the user have less than 6 row in the table my ticket")
+    public void TC05(){
+        homePage.gotoMenuTap(Constant.TAB_LOGIN);
+        loginPage.login(Constant.EMAIL, Constant.PASSWORD);
+        homePage.gotoMenuTap(Constant.TAB_MY_TICKET);
+        Assert.assertFalse(myTicketPage.isTitleFilterForm(),"Filter form still display");
+    }
+
+    @Test(description = "TC06 - Amount ticket is correct display at note")
+    public void TC06(){
+        homePage.gotoMenuTap(Constant.TAB_LOGIN);
+        loginPage.login(Constant.EMAIL, Constant.PASSWORD);
+        homePage.gotoMenuTap(Constant.TAB_MY_TICKET);
+        Assert.assertTrue(myTicketPage.checkAmountTicket(),"Amount ticket is incorrect display");
+    }
+
 }
