@@ -154,4 +154,5 @@ public class BookTicketPage {
     public String valueSelectedOfDepartStation(){
         return getSelectedOfDepartFromElement().getText();
     }
+
 }
