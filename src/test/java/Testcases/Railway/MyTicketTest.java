@@ -26,9 +26,9 @@ public class MyTicketTest extends BaseTest {
         homePage.gotoMenuTap(Constant.TAB_LOGIN);
         loginPage.login(Constant.EMAIL, Constant.PASSWORD);
         homePage.gotoMenuTap(Constant.TAB_MY_TICKET);
-        int before = MyTicketPage.CheckRowConditionsFilter("Depart Station", "Huế", "","","");
+        int before = myTicketPage.checkRowConditionsFilter("Depart Station", "Huế", "","","");
         myTicketPage.Filter("Huế", "", "", "");
-        int after = MyTicketPage.CheckRowConditionsFilter("Depart Station", "Huế", "","","");
+        int after = myTicketPage.checkRowConditionsFilter("Depart Station", "Huế", "","","");
         boolean checkFilterCorrect = myTicketPage.checkFilterCorrect(before,after);
         Assert.assertTrue(checkFilterCorrect, "filter fail");
     }
@@ -37,9 +37,9 @@ public class MyTicketTest extends BaseTest {
         homePage.gotoMenuTap(Constant.TAB_LOGIN);
         loginPage.login(Constant.EMAIL, Constant.PASSWORD);
         homePage.gotoMenuTap(Constant.TAB_MY_TICKET);
-        int before = MyTicketPage.CheckRowConditionsFilter("Depart Station", "Sài Gòn","Phan Thiết", "", "");
+        int before = myTicketPage.checkRowConditionsFilter("Depart Station", "Sài Gòn","Phan Thiết", "", "");
         myTicketPage.Filter("Sài Gòn", "Phan Thiết", "", "");
-        int after = MyTicketPage.CheckRowConditionsFilter("Depart Station", "Sài Gòn","Phan Thiết", "", "");
+        int after = myTicketPage.checkRowConditionsFilter("Depart Station", "Sài Gòn","Phan Thiết", "", "");
         boolean checkFilterCorrect = myTicketPage.checkFilterCorrect(before,after);
         Assert.assertTrue(checkFilterCorrect, "filter fail");
     }
@@ -49,9 +49,9 @@ public class MyTicketTest extends BaseTest {
         homePage.gotoMenuTap(Constant.TAB_LOGIN);
         loginPage.login(Constant.EMAIL, Constant.PASSWORD);
         homePage.gotoMenuTap(Constant.TAB_MY_TICKET);
-        int before = MyTicketPage.CheckRowConditionsFilter("Depart Station", "Sài Gòn","Phan Thiết", "10/30/2022", "Expired");
+        int before = myTicketPage.checkRowConditionsFilter("Depart Station", "Sài Gòn","Phan Thiết", "10/30/2022", "Expired");
         myTicketPage.Filter("Sài Gòn", "Phan Thiết", "10/30/2022", "Expired");
-        int after = MyTicketPage.CheckRowConditionsFilter("Depart Station", "Sài Gòn","Phan Thiết", "10/30/2022", "Expired");
+        int after = myTicketPage.checkRowConditionsFilter("Depart Station", "Sài Gòn","Phan Thiết", "10/30/2022", "Expired");
         boolean checkFilterCorrect = myTicketPage.checkFilterCorrect(before,after);
         Assert.assertTrue(checkFilterCorrect, "filter fail");
     }

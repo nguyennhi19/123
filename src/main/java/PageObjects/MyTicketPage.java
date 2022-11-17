@@ -16,7 +16,7 @@ public class MyTicketPage {
     private final By titleFilter = By.xpath("//div[@class = 'Filter']//strong");
     private final By btnApplyFilter = By.xpath("//input[@value='Apply Filter']");
     private final By position = By.xpath("//table[@class='MyTable']//tbody//tr[last()]//td");
-    private final By note = By.xpath("//li[text() = 'You currently book 7 tickets, you can book 3 more.']");
+    private final By note = By.xpath("//li[contains(text() , 'You currently book')]");
 
 
     //Elements
@@ -73,13 +73,13 @@ public class MyTicketPage {
         this.getApplyFilterElement().click();
     }
 
-    public static int CheckRowConditionFilter(String filterName, String value){
+    public int checkRowConditionFilter(String filterName, String value){
         String text = "//table[@class='MyTable']//td[count(//table[@class='MyTable']//th[text()= '%s']/preceding-sibling::th)+1][text()='%s']";
         By rowConditionElement = By.xpath(String.format(text,filterName,value));
         return Constant.driver.findElements(rowConditionElement).size();
     }
 
-    public static int CheckRowConditionsFilter(String filterName, String value,String value1, String value2, String value3) {
+    public int checkRowConditionsFilter(String filterName, String value, String value1, String value2, String value3) {
         String text = "//table[@class='MyTable']//td[count(//table[@class='MyTable']//th[text()= '%s']/preceding-sibling::th)+1][text()='%s']";
         String text1 = "/following-sibling::td[text() = '%s']";
         String text2 = "/following-sibling::td[text() = '%s']";
