@@ -23,8 +23,6 @@ public class BookTicketPage {
     private final By valueOfDepartDate = By.xpath("//tr//td[4]");
     private final By valueOfAmount = By.xpath("//tr//td[7]");
     private final By bookTicketLbl = By.xpath("//h1[contains(.,'Book ticket')]");
-    private final By valueSelectedOfDepartFromDropbox = By.xpath("//select[@name = 'DepartStation']//option[@selected]");
-    private final By valueSelectedOfArriveAtDropbox = By.xpath("//select[@name = 'ArriveStation']//option[@selected]");
 
     //Elements
     private Select getSelectDate(){
@@ -87,14 +85,6 @@ public class BookTicketPage {
         return Constant.driver.findElement(bookTicketLbl);
     }
 
-    private WebElement getSelectedOfArriveAtElement(){
-        return Constant.driver.findElement(valueSelectedOfArriveAtDropbox);
-    }
-
-    public WebElement getSelectedOfDepartFromElement(){
-        return Constant.driver.findElement(valueSelectedOfDepartFromDropbox);
-    }
-
     //Methods
     public void bookTicket(String date, String departFrom, String arriverAt, String seatType, String ticketAmount){
         Utilities.pageDownEnd();
@@ -148,11 +138,10 @@ public class BookTicketPage {
     }
 
     public String valueSelectedOfArriveAt(){
-        return getSelectedOfArriveAtElement().getText();
+        return this.getSelectArriverAt().getFirstSelectedOption().getText();
     }
 
     public String valueSelectedOfDepartStation(){
-        return getSelectedOfDepartFromElement().getText();
+        return this.getSelectDepartFrom().getFirstSelectedOption().getText();
     }
-
 }
