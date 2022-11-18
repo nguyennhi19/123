@@ -4,6 +4,7 @@
     <test name="Test 1">
         <classes>
             <class name="Testcases.Railway.LoginTest"></class>
+            <class name="Testcases.Railway.RegisterTest"></class>
         </classes>
     </test>
 </suite>

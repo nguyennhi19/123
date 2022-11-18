@@ -6,18 +6,18 @@ import PageObjects.Railway.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class ChangPasswordTest extends TestBase {
+public class ChangPasswordTest extends BaseTest {
 
     LoginPage loginPage = new LoginPage();
     ChangePasswordPage changePasswordPage = new ChangePasswordPage();
 
     @Test(description = "TC09 - User can change password")
     public void TC01(){
-        homePage.gotoLoginPage();
+        homePage.gotoMenuTap(Constant.TAB_LOGIN);
         loginPage.login(Constant.EMAIL, Constant.PASSWORD);
-        loginPage.gotoChangePasswordPage();
+        homePage.gotoMenuTap(Constant.TAB_CHANGE_PASSWORD);
         changePasswordPage.changePassword(Constant.PASSWORD, Constant.PASSWORD, Constant.PASSWORD);
-        String actualMsg = changePasswordPage.getChangePasswordSuccessMsg();
+        String actualMsg = changePasswordPage.verifyErrorMessageAtConfirmPassword();
         String expectedMsg = Constant.MSG_CHANGE_PASSWORD_SUCCESS;
         Assert.assertEquals(actualMsg,expectedMsg,"The message content is not displayed correctly" );
     }
