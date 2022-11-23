@@ -1,7 +1,7 @@
 package Testcases.Railway;
 
 import Common.DriverManager;
-import PageObjects.Railway.HomePage;
+import PageObjects.HomePage;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 

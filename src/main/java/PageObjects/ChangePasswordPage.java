@@ -1,45 +1,53 @@
 package PageObjects;
 
-import Common.Constant;
+import Common.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class ChangePasswordPage {
-
     //Locator
-    private final By txtCurrentPassword = By.xpath("//input[@id='currentPassword']");
-    private final By txtNewPassword = By.xpath("//input[@id='newPassword']");
-    private final By txtConfirmPassword = By.xpath("//input[@id='confirmPassword']");
+    private final By lblNamePage = By.xpath("//div[@id='content']/h1");
+    private final By txtCurrentPassword = By.id("currentPassword");
+    private final By txtNewPassword = By.id("newPassword");
+    private final By txtConfirmPassword = By.id("confirmPassword");
     private final By btnChangePassword = By.xpath("//input[@value='Change Password']");
-    private final By changePasswordSuccessMsg = By.xpath("//p[@class='message success']");
-    private final By changePasswordErrorMsg = By.xpath("//label[@class='validation-error']");
+    private final By lblSuccessMsg = By.xpath("//p[@class='message success']");
+    private final By lblErrorMsg = By.xpath("//label[@class='validation-error']");
 
     //Elements
+    private WebElement getNamePage(){
+        return Constant.DRIVER.findElement(lblNamePage);
+    }
     private WebElement getTextCurrentPassword(){
-        return Constant.driver.findElement(txtCurrentPassword);
+        return Constant.DRIVER.findElement(txtCurrentPassword);
     }
 
     private WebElement getTextNewPassword(){
-        return Constant.driver.findElement(txtNewPassword);
+        return Constant.DRIVER.findElement(txtNewPassword);
     }
 
     private WebElement getTextConfirmPassword(){
-        return Constant.driver.findElement(txtConfirmPassword);
+        return Constant.DRIVER.findElement(txtConfirmPassword);
     }
 
     private WebElement getBtnChangePassword(){
-        return Constant.driver.findElement(btnChangePassword);
+        return Constant.DRIVER.findElement(btnChangePassword);
     }
 
     public WebElement getChangePasswordSuccess() {
-        return Constant.driver.findElement(changePasswordSuccessMsg);
+        return Constant.DRIVER.findElement(lblSuccessMsg);
     }
 
-    private WebElement getErrorMessageAtConfirmPassword(){
-        return Constant.driver.findElement(changePasswordErrorMsg);
+    private WebElement getErrorMsgAtConfirmPassword(){
+        return Constant.DRIVER.findElement(lblErrorMsg);
     }
 
     //Methods
+    public boolean isAtChangPasswordPage() {
+        String titleChangePasswordPage = "Change password";
+        return getNamePage().getText().equals(titleChangePasswordPage);
+    }
+
     public void changePassword(String currentPassword,String newPassword,String confirmPassword){
         this.getTextCurrentPassword().sendKeys(currentPassword);
         this.getTextNewPassword().sendKeys(newPassword);
@@ -51,7 +59,7 @@ public class ChangePasswordPage {
         return getChangePasswordSuccess().getText();
     }
 
-    public String verifyErrorMessageAtConfirmPassword(){
-        return this.getErrorMessageAtConfirmPassword().getText();
+    public String getErrorMsgConfirmPassword(){
+        return this.getErrorMsgAtConfirmPassword().getText();
     }
 }

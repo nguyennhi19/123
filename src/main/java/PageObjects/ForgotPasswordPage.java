@@ -1,34 +1,32 @@
 package PageObjects;
 
-import Common.Constant;
-import Common.Utilities;
+import Common.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class ForgotPasswordPage {
     // Locators
-    private final By txtEmailAddress = By.xpath("//input[@id='email']");
+    private final By txtEmailAddress = By.id("email");
     private final By btnSendInstructions = By.xpath("//input[@type='submit']");
-    private final By errorMsg = By.xpath("//p[@class='message error']");
+    private final By lblErrorMsg = By.xpath("//p[@class='message error']");
 
     // Elements
-
     public WebElement getEmailAddress() {
-        return Constant.driver.findElement(txtEmailAddress);
+        return Constant.DRIVER.findElement(txtEmailAddress);
     }
 
     public WebElement getBtnSendInstructions() {
-        return Constant.driver.findElement(btnSendInstructions);
+        return Constant.DRIVER.findElement(btnSendInstructions);
     }
 
     public WebElement getErrorMsg(){
-        return Constant.driver.findElement(errorMsg);
+        return Constant.DRIVER.findElement(lblErrorMsg);
     }
 
     // Methods
     public void sendInstruction(String email){
-        Utilities.getScrollToElement(btnSendInstructions);
         this.getEmailAddress().sendKeys(email);
+        Utilities.scrollToElement(btnSendInstructions);
         this.getBtnSendInstructions().click();
     }
 
@@ -36,3 +34,4 @@ public class ForgotPasswordPage {
         return this.getErrorMsg().getText();
     }
 }
+

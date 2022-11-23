@@ -1,15 +1,15 @@
 package PageObjects;
 
-import Common.Constant;
+import Common.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class ServerError {
-    private final By serverErrorMsg = By.xpath("//h1");
+    private final By lblServerErrorMsg = By.xpath("//h1");
 
     // Elements
     public WebElement getServerError(){
-        return Constant.driver.findElement(serverErrorMsg);
+        return Constant.DRIVER.findElement(lblServerErrorMsg);
     }
 
     // Methods
@@ -18,10 +18,6 @@ public class ServerError {
     }
 
     public boolean verifyMailBoxDisplayed(){
-        boolean check = false;
-        if(getServerErrorMsg().contains(Constant.ErrorPage)){
-            check = true;
-        }
-        return check;
+        return getServerErrorMsg().contains(Constant.ErrorPage);
     }
 }

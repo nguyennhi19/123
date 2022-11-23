@@ -1,120 +1,105 @@
 package PageObjects;
 
-import Common.Constant;
-import Common.Utilities;
+import Common.*;
+import DataObjects.BookTicket;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class BookTicketPage {
     //Locator
-    private final By successfullyTitle = By.xpath("//*[@id='content']/h1");
-    private final By selectDate = By.name("Date");
-    private final By selectDepartFrom = By.name("DepartStation");
-    private final By selectArriverAt = By.name("ArriveStation");
-    private final By selectSeatType = By.name("SeatType");
-    private final By selectTicketAmount = By.name("TicketAmount");
-    private final By btnLBookTicket = By.xpath("//input[@value='Book ticket']");
-    private final By errorMessageAtArriveStation = By.xpath("//label[text()= 'Arrive at:']/following-sibling::label");
-    private final By errorMessageAtTicketAmount = By.xpath("//label[text()= 'Ticket amount:']/following-sibling::label");
-    private final By valueOfDepartStation = By.xpath("//tr//td[position()=1]");
-    private final By valueOfArriveStation = By.xpath("//tr//td[2]");
-    private final By valueOfSeatType = By.xpath("//tr//td[3]");
-    private final By valueOfDepartDate = By.xpath("//tr//td[4]");
-    private final By valueOfAmount = By.xpath("//tr//td[7]");
-    private final By bookTicketLbl = By.xpath("//h1[contains(.,'Book ticket')]");
+    private final By lblSuccessfully = By.xpath("//*[@id='content']/h1");
+    private final By cbbDate = By.name("Date");
+    private final By cbbDepartFrom = By.name("DepartStation");
+    private final By cbbArriverAt = By.name("ArriveStation");
+    private final By cbbSeatType = By.name("SeatType");
+    private final By cbbTicketAmount = By.name("TicketAmount");
+    private final By btnBookTicket = By.xpath("//input[@value='Book ticket']");
+    private final By lblErrorMsgAtArriveSt = By.xpath("//label[text()= 'Arrive at:']/following-sibling::label");
+    private final By lblErrorMsgAtTicketAmount = By.xpath("//label[text()= 'Ticket amount:']/following-sibling::label");
+    private final By valueOfDepartStation = By.xpath("//tr//td[count(//th[text()= 'Depart Station']/preceding-sibling::th)+1]");
+    private final By valueOfArriveStation = By.xpath("//tr//td[count(//th[text()= 'Arrive Station']/preceding-sibling::th)+1]");
+    private final By valueOfSeatType = By.xpath("//tr//td[count(//th[text()= 'Seat Type']/preceding-sibling::th)+1]");
+    private final By valueOfDepartDate = By.xpath("//tr//td[count(//th[text()= 'Depart Date']/preceding-sibling::th)+1]");
+    private final By valueOfAmount = By.xpath("//tr//td[count(//th[text()= 'Amount']/preceding-sibling::th)+1]");
+    private final By lblBookTicket = By.xpath("//h1[contains(.,'Book ticket')]");
 
     //Elements
     private Select getSelectDate(){
-        return new Select(Constant.driver.findElement(selectDate));
+        return new Select(Constant.DRIVER.findElement(cbbDate));
     }
 
     private Select getSelectDepartFrom(){
-        return new Select(Constant.driver.findElement(selectDepartFrom));
+        return new Select(Constant.DRIVER.findElement(cbbDepartFrom));
     }
 
     private Select getSelectArriverAt(){
-        return new Select(Constant.driver.findElement(selectArriverAt));
+        return new Select(Constant.DRIVER.findElement(cbbArriverAt));
     }
 
     private Select getSelectSeatType(){
-        return new Select(Constant.driver.findElement(selectSeatType));
+        return new Select(Constant.DRIVER.findElement(cbbSeatType));
     }
 
     private Select getSelectTicketAmount(){
-        return new Select(Constant.driver.findElement(selectTicketAmount));
+        return new Select(Constant.DRIVER.findElement(cbbTicketAmount));
     }
 
     private WebElement getBtnBookTicket(){
-        return Constant.driver.findElement(btnLBookTicket);
+        return Constant.DRIVER.findElement(btnBookTicket);
     }
 
     private WebElement getSuccessfulTitle(){
-        return Constant.driver.findElement(successfullyTitle);
+        return Constant.DRIVER.findElement(lblSuccessfully);
     }
 
-    private WebElement getErrorMessageAtArriveStation(){
-        return Constant.driver.findElement(errorMessageAtArriveStation);
+    private WebElement getErrorMsgAtArriveStation(){
+        return Constant.DRIVER.findElement(lblErrorMsgAtArriveSt);
     }
 
-    private WebElement getErrorMessageAtTicketAmount(){
-        return Constant.driver.findElement(errorMessageAtTicketAmount);
+    private WebElement getErrorMsgAtTicketAmount(){
+        return Constant.DRIVER.findElement(lblErrorMsgAtTicketAmount);
     }
 
     private WebElement getValueOfAmountElement(){
-        return Constant.driver.findElement(valueOfAmount);
+        return Constant.DRIVER.findElement(valueOfAmount);
     }
 
     private WebElement getValueOfDepartDateElement(){
-        return Constant.driver.findElement(valueOfDepartDate);
+        return Constant.DRIVER.findElement(valueOfDepartDate);
     }
 
     private WebElement getValueOfSeatTypeElement(){
-        return Constant.driver.findElement(valueOfSeatType);
+        return Constant.DRIVER.findElement(valueOfSeatType);
     }
 
     private WebElement getValueOfArriveStationElement(){
-        return Constant.driver.findElement(valueOfArriveStation);
+        return Constant.DRIVER.findElement(valueOfArriveStation);
     }
 
     private WebElement getValueOfDepartStationElement(){
-        return Constant.driver.findElement(valueOfDepartStation);
+        return Constant.DRIVER.findElement(valueOfDepartStation);
     }
 
     public WebElement getContentBookTicket() {
-        return Constant.driver.findElement(bookTicketLbl);
+        return Constant.DRIVER.findElement(lblBookTicket);
     }
 
     //Methods
-    public void bookTicket(String date, String departFrom, String arriverAt, String seatType, String ticketAmount){
-        Utilities.pageDownEnd();
-        this.getSelectDate().selectByVisibleText(date);
-        this.getSelectDepartFrom().selectByVisibleText(departFrom);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        this.getSelectArriverAt().selectByVisibleText(arriverAt);
-        this.getSelectSeatType().selectByVisibleText(seatType);
-        this.getSelectTicketAmount().selectByVisibleText(ticketAmount);
-        this.getBtnBookTicket().click();
-    }
-
-    public String navigateSuccessfulScreen(){
+    public String getSuccessfulText(){
         return this.getSuccessfulTitle().getText();
     }
 
-    public String verifyErrorMessageAtArriveStation(){
-        return this.getErrorMessageAtArriveStation().getText();
+    public String getErrorMessageAtArriveStation(){
+        return this.getErrorMsgAtArriveStation().getText();
     }
 
-    public String verifyErrorMessageAtTicketAmount(){
-        return this.getErrorMessageAtTicketAmount().getText();
+    public String getErrorMessageAtTicketAmount(){
+        return this.getErrorMsgAtTicketAmount().getText();
     }
 
-    public String getValueTicketOfAmountColumn(){
-        return getValueOfAmountElement().getText();
+    public int getValueTicketOfAmountColumn(){
+        return Integer.parseInt(getValueOfAmountElement().getText());
     }
 
     public String getValueTicketOfDepartDateColumn(){
@@ -137,11 +122,31 @@ public class BookTicketPage {
         return getContentBookTicket().getText();
     }
 
-    public String valueSelectedOfArriveAt(){
+    public boolean isAtBookTicketPage() {
+        String titleBookTicket = "Book ticket";
+        return this.getContentBookTicket().getText().equals(titleBookTicket);
+    }
+
+    public String getCbbArriveAt(){
         return this.getSelectArriverAt().getFirstSelectedOption().getText();
     }
 
-    public String valueSelectedOfDepartStation(){
+    public String getCbbDepartStation(){
         return this.getSelectDepartFrom().getFirstSelectedOption().getText();
+    }
+
+    public void bookTicket(BookTicket bookTicket){
+        Utilities.scrollPageDownEnd();
+        this.getSelectDate().selectByVisibleText(bookTicket.getDepartDate());
+        this.getSelectDepartFrom().selectByVisibleText(bookTicket.getDepartFrom());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        this.getSelectArriverAt().selectByVisibleText(bookTicket.getArriveAt());
+        this.getSelectSeatType().selectByVisibleText(bookTicket.getSeatType());
+        this.getSelectTicketAmount().selectByVisibleText(String.valueOf(bookTicket.getTicketAmount()));
+        this.getBtnBookTicket().click();
     }
 }

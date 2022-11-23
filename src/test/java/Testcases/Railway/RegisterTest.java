@@ -1,7 +1,8 @@
 package Testcases.Railway;
 
-import Common.Constant;
-import PageObjects.Railway.LoginPage;
+import Common.*;
+import DataObjects.Login;
+import PageObjects.LoginPage;
 import PageObjects.RegisterPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -9,10 +10,11 @@ import org.testng.annotations.Test;
 public class RegisterTest extends BaseTest {
     RegisterPage registerPage = new RegisterPage();
     LoginPage loginPage = new LoginPage();
+    Login login;
 
     @Test(description = "TC01 -User can create new account")
     public void TC01(){
-        homePage.gotoMenuTap(Constant.TAB_REGISTER);
+        homePage.gotoMenuTab(Constant.TAB_REGISTER);
         registerPage.register(Constant.EMAIL_REGISTER,Constant.PASSWORD,Constant.CONFIRM_PASSWORD,Constant.PID);
         String actualMsg = registerPage.getRegisterSuccessMsg();
         String expectedMsg = Constant.MSG_REGISTER_SUCCESSFULLY;
@@ -20,10 +22,11 @@ public class RegisterTest extends BaseTest {
     }
     @Test(description = "TC02 -User can't login with an account hasn't been activated")
     public void TC02(){
-        homePage.gotoMenuTap(Constant.TAB_REGISTER);
+        homePage.gotoMenuTab(Constant.TAB_REGISTER);
         registerPage.register(Constant.EMAIL_REGISTER,Constant.PASSWORD,Constant.CONFIRM_PASSWORD,Constant.PID);
-        homePage.gotoMenuTap(Constant.TAB_LOGIN);
-        loginPage.login(Constant.EMAIL_REGISTER, Constant.PASSWORD);
+        homePage.gotoMenuTab(Constant.TAB_LOGIN);
+        login = new Login(Constant.EMAIL, Constant.PASSWORD);
+        loginPage.login(login);
         Assert.assertTrue(loginPage.isAtLoginPage(),
                 "User can login success when account hasn't been activated");
         String actualMsg = loginPage.getErrorMsg();
@@ -33,7 +36,7 @@ public class RegisterTest extends BaseTest {
 
     @Test(description = "TC03 - User can't create account with Confirm password is not the same with Password")
     public void TC03() {
-        homePage.gotoMenuTap(Constant.TAB_REGISTER);
+        homePage.gotoMenuTab(Constant.TAB_REGISTER);
         registerPage.register(Constant.EMAIL_REGISTER,Constant.PASSWORD,Constant.CONFIRM_INVALID_PASSWORD,Constant.PID);
         String actualMsg = registerPage.getRegisterFailedMsg();
         String expectedMsg = Constant.MSG_REGISTER_FAILED;
@@ -42,7 +45,7 @@ public class RegisterTest extends BaseTest {
 
     @Test(description = "TC04 - User can't create account while password and PID fields are empty")
     public void TC04(){
-        homePage.gotoMenuTap(Constant.TAB_REGISTER);
+        homePage.gotoMenuTab(Constant.TAB_REGISTER);
         registerPage.register(Constant.EMAIL_REGISTER,"",Constant.CONFIRM_PASSWORD,"");
         String actualMsg = registerPage.getRegisterFailedMsg();
         String expectedMsg = Constant.MSG_REGISTER_FAILED;
