@@ -90,7 +90,7 @@ public class Exercises2Test extends BaseTest {
         Log.info("TC14 - User can book 1 ticket at a time");
         Log.info("Step1 - Navigate to QA Railway Website");
         homePage.gotoMenuTab(Constant.TAB_LOGIN);
-        login = new Login(Constant.EMAIL, Constant.PASSWORD);
+        login = new Login("nhi1@gmail.com", Constant.PASSWORD);
         loginPage.login(login);
         Log.info("Step2 - Login with a valid account ");
         homePage.gotoMenuTab(Constant.TAB_BOOK_TICKET);
@@ -109,7 +109,7 @@ public class Exercises2Test extends BaseTest {
         Assert.assertEquals(bookTicketPage.getValueTicketOfArriveAtColumn(), Constant.VALID_ARRIVE_AT, "value at Arrive Station is not correctly");
         Assert.assertEquals(bookTicketPage.getValueTicketOfSeatTypeColumn(), Constant.VALID_SEAT, "value of Seat Type is not correctly");
         Assert.assertEquals(bookTicketPage.getValueTicketOfDepartDateColumn(), Constant.VALID_DEPART_DATE, "value of DepartDate not correctly");
-        Assert.assertEquals(bookTicketPage.getValueTicketOfAmountColumn(), Constant.VALID_AMOUNT_TICKET, "value of Amount is not correctly");
+        Assert.assertEquals(bookTicketPage.getValueTicketOfAmountColumn(), Constant.MORE_AMOUNT_TICKET, "value of Amount is not correctly");
     }
 
     @Test(description = "TC15 - Ticket price page displays with ticket details after clicking on check price link in Train timetable page")

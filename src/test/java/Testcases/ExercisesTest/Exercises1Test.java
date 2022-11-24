@@ -285,11 +285,11 @@ public class Exercises1Test extends BaseTest {
         loginPage.login(login);
         Log.info("Step2 - Login with a valid account ");
         homePage.gotoMenuTab(Constant.TAB_MY_TICKET);
-        String amountText = myTicketPage.getNoteTextAfterCancelTicket("Huế","Sài Gòn","Soft seat","11/25/2022");
+        String amountText = myTicketPage.getNoteTextAfterCancelTicket("Huế","Sài Gòn","Soft seat","12/2/2022");
         Log.info("Step3 - Click on My ticket tab");
         String countItemBeforeDelete = myTicketPage.getPositionText();
         Log.info("Step4 - Click on Cancel button of ticket which user want to cancel.");
-        myTicketPage.deleteTicket("Huế","Sài Gòn","Soft seat","11/25/2022");
+        myTicketPage.deleteTicket("Huế","Sài Gòn","Soft seat","12/2/2022");
         Log.info("Step5 - Click on OK button on Confirmation message Are you sure?");
         String countItemAfterDelete = myTicketPage.getPositionText();
         Assert.assertFalse(myTicketPage.verifyTicketWasDeleted(countItemBeforeDelete, countItemAfterDelete), "Ticket cannot be deleted");

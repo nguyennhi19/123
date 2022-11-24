@@ -3,8 +3,18 @@
 <suite name="Suite" >
     <test name="Test 1">
         <classes>
+            <class name="Testcases.ExercisesTest.Exercises1Test"></class>
+            <class name="Testcases.ExercisesTest.Exercises2Test"></class>
+            <class name="Testcases.ExercisesTest.Exercises3Test"></class>
+            <class name="Testcases.Railway.BookTicketTest"></class>
+            <class name="Testcases.Railway.ChangPasswordTest"></class>
+            <class name="Testcases.Railway.ForgotPasswordTest"></class>
             <class name="Testcases.Railway.LoginTest"></class>
+            <class name="Testcases.Railway.MyTicketTest"></class>
+            <class name="Testcases.Railway.TimeTableTest"></class>
             <class name="Testcases.Railway.RegisterTest"></class>
+            <class name="Testcases.testData.DataTest"></class>
         </classes>
+
     </test>
 </suite>
