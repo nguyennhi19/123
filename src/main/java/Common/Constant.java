@@ -24,16 +24,13 @@ public class Constant {
     public static final String TAB_TIMETABLE = "Timetable";
     public static final String TAB_TICKET_PRICE = "Ticket price";
     public static final String TAB_MY_TICKET = "My ticket";
-    public static final String ErrorPage = "Server Error";
+    public static final String SERVER_ERROR = "Server Error";
     public static final String TITLE_TABLE_CHECK_PRICE = "Ticket price from Sài Gòn to Huế";
     public static final String MSG_CONTENT_OF_BOOK_TICKET_PAGE = "Book ticket";
     public static final String MSG_CONTENT_OF_TICKET_PRICE_PAGE = "Ticket Price";
-    public static final String TITLE_FILTER_FORM = "Filters:";
     public static final int NUMBER_OF_LOGIN = 4;
 
     public static final String EMAIL = "nhi12@gmail.com";
-    public static final String EMAIL_NEW = "nhi123@gmail.com";
-    public static final String EMAIL_5_TICKET = "nhi1234@gmail.com";
     public static final String EMAIL_UN_EXITING = "n@gmail.com";
     public static final String PASSWORD = "12345678";
     public static final String MSG_WELCOME_USER = "Welcome %s";
@@ -57,15 +54,11 @@ public class Constant {
     public static final String VALID_DEPART_DATE = Utilities.getDate();
     public static final String VALID_DEPART_FROM = "Huế";
     public static final String VALID_ARRIVE_AT = "Sài Gòn";
-    public static final String ARRIVE_AT_DUPLICATE_WITH_DEPART_FROM = "Huế";
-    public static final String ARRIVE_AT_TICKET_NO_SUPPORT = "Phan Thiết";
     public static final String VALID_SEAT = "Soft seat";
     public static final int VALID_AMOUNT_TICKET = 1;
     public static final int MORE_AMOUNT_TICKET = 5;
     public static final int MAX_AMOUNT_TICKET = 10;
     public static final String SUCCESSFULLY_TITLE = "Ticket Booked Successfully!";
-    public static final String ERROR_MESSAGE_TRAIN_NO_SUPPORT = "This ticket no support on this day";
-    public static final String ERROR_MESSAGE_ARRIVE_AT_DUPLICATE_WITH_DEPART_FROM = "Depart and Arrive stations can't be the same.";
     public static final String ERROR_MESSAGE_WHEN_BOOK_10_TICKET = "You have booked 10 tickets. You can book no more.";
     public static final String DEPART_FROM = "Sài Gòn";
     public static final String ARRIVE_AT = "Huế";

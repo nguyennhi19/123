@@ -17,7 +17,6 @@ public class Exercises3Test extends BaseTest {
     ContactPage contactPage = new ContactPage();
     BookTicketPage bookTicketPage = new BookTicketPage();
     TicketPricePage ticketPricePage = new TicketPricePage();
-    MyTicketPage myTicketPage = new MyTicketPage();
     ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage();
     ServerError serverError = new ServerError();
     BookTicket bookTicket;

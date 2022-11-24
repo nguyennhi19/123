@@ -1,15 +1,12 @@
 package Testcases.Railway;
 
 import Common.*;
-import DataObjects.Login;
 import PageObjects.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class RegisterTest extends BaseTest {
     RegisterPage registerPage = new RegisterPage();
-    LoginPage loginPage = new LoginPage();
-    Login login;
 
     @Test(description = "TC01 -User can create new account")
     public void TC01(){

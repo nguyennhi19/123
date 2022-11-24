@@ -15,7 +15,6 @@ public class BookTicketPage {
     private final By cbbSeatType = By.name("SeatType");
     private final By cbbTicketAmount = By.name("TicketAmount");
     private final By btnBookTicket = By.xpath("//input[@value='Book ticket']");
-    private final By lblErrorMsgAtArriveSt = By.xpath("//label[text()= 'Arrive at:']/following-sibling::label");
     private final By lblErrorMsgAtTicketAmount = By.xpath("//label[text()= 'Ticket amount:']/following-sibling::label");
     private final By valueOfDepartStation = By.xpath("//tr//td[count(//th[text()= 'Depart Station']/preceding-sibling::th)+1]");
     private final By valueOfArriveStation = By.xpath("//tr//td[count(//th[text()= 'Arrive Station']/preceding-sibling::th)+1]");
@@ -53,10 +52,6 @@ public class BookTicketPage {
         return Constant.DRIVER.findElement(lblSuccessfully);
     }
 
-    private WebElement getErrorMsgAtArriveStation(){
-        return Constant.DRIVER.findElement(lblErrorMsgAtArriveSt);
-    }
-
     private WebElement getErrorMsgAtTicketAmount(){
         return Constant.DRIVER.findElement(lblErrorMsgAtTicketAmount);
     }
@@ -88,10 +83,6 @@ public class BookTicketPage {
     //Methods
     public String getSuccessfulText(){
         return this.getSuccessfulTitle().getText();
-    }
-
-    public String getErrorMessageAtArriveStation(){
-        return this.getErrorMsgAtArriveStation().getText();
     }
 
     public String getErrorMessageAtTicketAmount(){

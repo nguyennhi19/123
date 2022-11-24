@@ -181,7 +181,7 @@ public class MyTicketPage {
     public String getNoteTextAfterBookTicket(int amountBefore){
         int currentAmount;
         if(amountBefore == 10){
-             currentAmount =  amountBefore + 0;
+             currentAmount = amountBefore;
         }
         else currentAmount =  amountBefore + bookTicketPage.getValueTicketOfAmountColumn();
         return String.format("You currently book %s ticket%s, you can book %s more.", currentAmount, currentAmount <= 1? "":"s", currentAmount == 10 ? "no":10 - currentAmount);

@@ -18,6 +18,6 @@ public class ServerError {
     }
 
     public boolean verifyMailBoxDisplayed(){
-        return getServerErrorMsg().contains(Constant.ErrorPage);
+        return getServerErrorMsg().contains(Constant.SERVER_ERROR);
     }
 }
