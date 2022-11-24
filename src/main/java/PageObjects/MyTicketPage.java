@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import static Common.Utilities.scrollToElement;
+
 public class MyTicketPage {
     BookTicketPage bookTicketPage = new BookTicketPage();
     //Locators
@@ -18,14 +20,12 @@ public class MyTicketPage {
     private final By position = By.xpath("//table[@class='MyTable']//tbody//tr[last()]//td");
     private final By lblNote = By.xpath("//li[starts-with(text() , 'You currently book')]");
     private final By lblErrorMsg = By.xpath("//div[@class='error message']");
+    private final By btnCancel = By.xpath("//input[@value='Cancel']");
     //Elements
 
 
     private WebElement getNamePage(){
         return Constant.DRIVER.findElement(lblNamePage);
-    }
-    private WebElement getTitleFilterElement() {
-        return Constant.DRIVER.findElement(lblFilter);
     }
 
     private Select getDepartStationElement() {
@@ -51,6 +51,11 @@ public class MyTicketPage {
     public WebElement getErrorMsg() {
         return Constant.DRIVER.findElement(lblErrorMsg);
     }
+
+    private WebElement getBtnCancel() {
+        return Constant.DRIVER.findElement(btnCancel);
+    }
+
 
     //Methods
     public boolean isAtMyTicketPage() {
@@ -125,9 +130,24 @@ public class MyTicketPage {
     }
 
     public void deleteTicket(String departFrom, String arriveAt, String seatType, String date) {
-        Utilities.scrollToElement(By.xpath(getTicketNeededDelete(departFrom, arriveAt, seatType, date)));
+        scrollToElement(By.xpath(getTicketNeededDelete(departFrom, arriveAt, seatType, date)));
         Constant.DRIVER.findElement(By.xpath(getTicketNeededDelete(departFrom, arriveAt, seatType, date))).click();
         Utilities.acceptPopup();
+    }
+
+    public int getAmountBtnCancel(){
+        return Constant.DRIVER.findElements(btnCancel).size();
+    }
+
+    public void cancelAllTicket(){
+        int amount = this.getAmountBtnCancel();
+        for (int i = 0; i < amount; i++){
+            if(this.getAmountBtnCancel() > 0) {
+                scrollToElement(btnCancel);
+                this.getBtnCancel().click();
+                Utilities.acceptPopup();
+            }
+        }
     }
 
     public boolean verifyTicketWasDeleted(String actualMsg, String expectedMsg) {
@@ -140,8 +160,12 @@ public class MyTicketPage {
         return flag;
     }
 
+    private int getTitleFilterElement() {
+        return Constant.DRIVER.findElements(lblFilter).size();
+    }
+
     public boolean isTitleFilterForm(){
-        return this.getTitleFilterElement().getText().equals(Constant.TITLE_FILTER_FORM);
+        return this.getTitleFilterElement() > 0;
     }
 
     public int getAmountTicket(){
@@ -151,13 +175,16 @@ public class MyTicketPage {
 
     public String getNoteText(){
         int currentAmount = getAmountTicket();
-        return String.format("You currently book %s ticket%s, you can book %s more.", currentAmount, currentAmount <= 1? "":"s", 10 - currentAmount );
+        return String.format("You currently book %s ticket%s, you can book %s more.", currentAmount, currentAmount <= 1? "":"s", currentAmount == 10 ? "no":10 - currentAmount);
     }
 
     public String getNoteTextAfterBookTicket(int amountBefore){
-        int currentAmount =  amountBefore + bookTicketPage.getValueTicketOfAmountColumn();
-        return String.format("You currently book %s ticket%s, you can book %s more.", currentAmount, currentAmount <= 1? "":"s", 10 - currentAmount );
-
+        int currentAmount;
+        if(amountBefore == 10){
+             currentAmount = amountBefore;
+        }
+        else currentAmount =  amountBefore + bookTicketPage.getValueTicketOfAmountColumn();
+        return String.format("You currently book %s ticket%s, you can book %s more.", currentAmount, currentAmount <= 1? "":"s", currentAmount == 10 ? "no":10 - currentAmount);
     }
 
     public String getAmountCancelTicket(String departFrom, String arriveAt, String seatType, String date){
@@ -171,7 +198,6 @@ public class MyTicketPage {
         return String.format("You currently book %s ticket%s, you can book %s more.", currentAmount, currentAmount <= 1? "":"s", 10 - currentAmount );
 
     }
-
 
     public String getNote() {
         return Constant.DRIVER.findElement(lblNote).getText();

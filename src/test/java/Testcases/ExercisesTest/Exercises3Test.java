@@ -86,8 +86,6 @@ public class Exercises3Test extends BaseTest {
         Log.info("Step7 -  Book one more ticket");
         String actualMsg = bookTicketPage.getErrorMessageAtTicketAmount();
         String expectedMsg = Constant.ERROR_MESSAGE_WHEN_BOOK_10_TICKET;
-        System.out.println(actualMsg);
-        System.out.println(expectedMsg);
         Assert.assertEquals(actualMsg, expectedMsg, "Book ticket is successful");
     }
 
