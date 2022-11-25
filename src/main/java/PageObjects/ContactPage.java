@@ -9,12 +9,8 @@ public class ContactPage {
     private final By hrefEmailDress = By.xpath("//a[@href = 'mailto:thanh.viet.le@logigear.com']");
 
     //Elements
-    private WebElement getHrefEmailDress(){
-        return Constant.DRIVER.findElement(hrefEmailDress);
-    }
+
 
     //Methods
-    public String getHrefEmailDressAtContactPage(){
-        return "mailto:" + this.getHrefEmailDress().getText();
-    }
+
 }

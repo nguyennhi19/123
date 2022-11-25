@@ -11,27 +11,8 @@ public class ForgotPasswordPage {
     private final By lblErrorMsg = By.xpath("//p[@class='message error']");
 
     // Elements
-    public WebElement getEmailAddress() {
-        return Constant.DRIVER.findElement(txtEmailAddress);
-    }
-
-    public WebElement getBtnSendInstructions() {
-        return Constant.DRIVER.findElement(btnSendInstructions);
-    }
-
-    public WebElement getErrorMsg(){
-        return Constant.DRIVER.findElement(lblErrorMsg);
-    }
 
     // Methods
-    public void sendInstruction(String email){
-        this.getEmailAddress().sendKeys(email);
-        Utilities.scrollToElement(btnSendInstructions);
-        this.getBtnSendInstructions().click();
-    }
 
-    public String getErrorMsgAtForgotPassword(){
-        return this.getErrorMsg().getText();
-    }
 }
 

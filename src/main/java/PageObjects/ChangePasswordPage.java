@@ -15,51 +15,8 @@ public class ChangePasswordPage {
     private final By lblErrorMsg = By.xpath("//label[@class='validation-error']");
 
     //Elements
-    private WebElement getNamePage(){
-        return Constant.DRIVER.findElement(lblNamePage);
-    }
-    private WebElement getTextCurrentPassword(){
-        return Constant.DRIVER.findElement(txtCurrentPassword);
-    }
 
-    private WebElement getTextNewPassword(){
-        return Constant.DRIVER.findElement(txtNewPassword);
-    }
-
-    private WebElement getTextConfirmPassword(){
-        return Constant.DRIVER.findElement(txtConfirmPassword);
-    }
-
-    private WebElement getBtnChangePassword(){
-        return Constant.DRIVER.findElement(btnChangePassword);
-    }
-
-    public WebElement getChangePasswordSuccess() {
-        return Constant.DRIVER.findElement(lblSuccessMsg);
-    }
-
-    private WebElement getErrorMsgAtConfirmPassword(){
-        return Constant.DRIVER.findElement(lblErrorMsg);
-    }
 
     //Methods
-    public boolean isAtChangPasswordPage() {
-        String titleChangePasswordPage = "Change password";
-        return getNamePage().getText().equals(titleChangePasswordPage);
-    }
 
-    public void changePassword(String currentPassword,String newPassword,String confirmPassword){
-        this.getTextCurrentPassword().sendKeys(currentPassword);
-        this.getTextNewPassword().sendKeys(newPassword);
-        this.getTextConfirmPassword().sendKeys(confirmPassword);
-        this.getBtnChangePassword().click();
-    }
-
-    public String getChangePasswordSuccessMsg(){
-        return getChangePasswordSuccess().getText();
-    }
-
-    public String getErrorMsgConfirmPassword(){
-        return this.getErrorMsgAtConfirmPassword().getText();
-    }
 }
