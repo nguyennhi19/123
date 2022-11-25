@@ -17,8 +17,24 @@ public class LoginPage extends GeneralPage {
     private final By linkForgotPasswordPage = By.linkText("Forgot Password page");
 
     //Elements
+    private WebElement getTextEmail(){
+        return Constant.DRIVER.findElement(txtEmail);
+    }
 
+    private WebElement getTextPassword(){
+        return Constant.DRIVER.findElement(txtPassword);
+    }
+
+    private WebElement getBtnLogin(){
+        return Constant.DRIVER.findElement(btnLogin);
+    }
 
     //Methods
+    public void login(Login login) {
+        this.getTextEmail().sendKeys(login.getEmail());
+        this.getTextPassword().sendKeys(login.getPassword());
+        Utilities.scrollToElement(btnLogin);
+        this.getBtnLogin().click();
+    }
 
 }

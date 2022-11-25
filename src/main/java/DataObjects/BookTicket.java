@@ -13,5 +13,4 @@ public class BookTicket {
     private String arriveAt;
     private String seatType;
     private int ticketAmount;
-
 }

@@ -18,8 +18,38 @@ public class RegisterPage {
     private final By lblPIDMsg = By.xpath("//li[@class='pid-number']/label[@class='validation-error']");
 
     //Elements
+    private WebElement getTextEmail(){
+        return Constant.DRIVER.findElement(txtEmail);
+    }
 
+    private WebElement getTextPassword(){
+        return Constant.DRIVER.findElement(txtPassword);
+    }
+
+    private WebElement getTextConfirmPassword(){
+        return Constant.DRIVER.findElement(txtConfirmPassword);
+    }
+
+    private WebElement getTextPid(){
+        return Constant.DRIVER.findElement(txtPid);
+    }
+
+    private WebElement getBtnRegister(){
+        return Constant.DRIVER.findElement(btnRegister);
+    }
 
     //Methods
+    public String register(String email, String password, String confirmPassword, String pid) {
+        this.getTextEmail().sendKeys(email);
+        this.getTextPassword().sendKeys(password);
+        this.getTextConfirmPassword().sendKeys(confirmPassword);
+        this.getTextPid().sendKeys(pid);
+        Utilities.scrollToElement(btnRegister);
+        this.getBtnRegister().click();
+        return email;
+    }
 
+    public String createRandomEmail() {
+        return "nhi+" + Utilities.genRandomString() + "@gmail.com";
+    }
 }
